@@ -6,14 +6,14 @@
 #    By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/15 18:50:07 by hmoumani          #+#    #+#              #
-#    Updated: 2021/06/15 20:50:24 by hmoumani         ###   ########.fr        #
+#    Updated: 2021/06/16 14:08:51 by hmoumani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-SRCS=push_swap.c tools.c
+SRCS=push_swap.c tools.c tools1.c operations.c operations1.c operations2.c
 
-FLAGS=-Wextra -Wall -Werror -g
+FLAGS=-Wextra -Wall -Werror -fsanitize=address
 
 NAME=push_swap
 

@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:38:51 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/15 21:20:02 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/16 14:01:38 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,31 @@ int		ft_strlen(char *s)
 	return (i);
 }
 
-int		ft_error(char *s, int *p, int *p2)
+int		ft_error(char *s, int *p, int *p2, int *p3)
 {
 	free(p);
 	free(p2);
+	free(p3);
 	write(2, s, ft_strlen(s));
 	return (1);
 }
 
 int		check_dup(t_info *info)
 {
-	for (int i = 0; i < info->size_a; i++) {
-		for (int j = i + 1; j < info->size_a; j++) { 
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < info->size_a) {
+		j = i + 1;
+		while (j < info->size_a) { 
 			if (info->stack_a[i] == info->stack_a[j]) {
 				return (1);
 			}
+			j++;
 		}
+		i++;
 	}
 	return (0);
 }
@@ -54,12 +63,12 @@ int		is_string(t_info *info)
 	while (i < info->size_a)
 	{
 		j = 0;
-		if (info->args[i][0] == '-' || info->args[i][0] == '+')
+		if ((info->args[i][0] == '-' || info->args[i][0] == '+') && info->args[i][1] != 0)
 			j++;
 		len = ft_strlen(info->args[i]);
 		while (j < len)
 		{
-			if (info->args[i][j] < '1' || info->args[i][j] > '9')
+			if (info->args[i][j] < '0' || info->args[i][j] > '9')
 			{
 				return (0);
 			}
@@ -87,7 +96,7 @@ int			ft_atoi(const char *str, int i, int *error)
 	while (str[i] != '\0' && (str[i] >= '0' && str[i] <= '9'))
 	{
 		result = result * 10 + (str[i++] - '0');
-		if ((result > 2147483647ULL && sign == -1) ||
+		if ((result > 2147483648ULL && sign == -1) ||
 		(result >= 2147483648ULL && sign == 1))
 		{
 			*error = 1;
