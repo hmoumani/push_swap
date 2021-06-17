@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:23:32 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/16 13:50:22 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/17 18:51:22 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include<string.h>
+# define CHUNK_SIZE 40;
+
 typedef struct	s_info
 {
 		int *stack_a;
@@ -25,7 +27,16 @@ typedef struct	s_info
 		char **args;
 		int *copy;
 		int size_copy;
+		int	chunk_start;
+		int	chunk_end;
 }				t_info;
+
+typedef struct s_curr_chunk
+{
+	int	start;
+	int end;
+}				t_curr_chunk;
+
 
 int		ft_error(char *s, int *p, int *p2, int *p3);
 int		ft_strlen(char *s);
@@ -45,5 +56,6 @@ void	rr(t_info *info);
 void	rra(t_info *info);
 void	rrb(t_info *info);
 void	rrr(t_info *info);
+void	call_op(char *name, void (*f)(t_info *), t_info *info);
 
 #endif

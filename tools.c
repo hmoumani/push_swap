@@ -6,25 +6,25 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:38:51 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/16 14:01:38 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/16 14:55:03 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_strlen(char *s)
+int	ft_strlen(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!s)
-		return i;
+		return (i);
 	while (s[i])
 		i++;
 	return (i);
 }
 
-int		ft_error(char *s, int *p, int *p2, int *p3)
+int	ft_error(char *s, int *p, int *p2, int *p3)
 {
 	free(p);
 	free(p2);
@@ -33,17 +33,20 @@ int		ft_error(char *s, int *p, int *p2, int *p3)
 	return (1);
 }
 
-int		check_dup(t_info *info)
+int	check_dup(t_info *info)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-	while (i < info->size_a) {
+	while (i < info->size_a)
+	{
 		j = i + 1;
-		while (j < info->size_a) { 
-			if (info->stack_a[i] == info->stack_a[j]) {
+		while (j < info->size_a)
+		{
+			if (info->stack_a[i] == info->stack_a[j])
+			{
 				return (1);
 			}
 			j++;
@@ -53,17 +56,18 @@ int		check_dup(t_info *info)
 	return (0);
 }
 
-int		is_string(t_info *info)
+int	is_string(t_info *info)
 {
-	int i;
-	int j;
-	int len;
+	int	i;
+	int	j;
+	int	len;
 
 	i = 0;
 	while (i < info->size_a)
 	{
 		j = 0;
-		if ((info->args[i][0] == '-' || info->args[i][0] == '+') && info->args[i][1] != 0)
+		if ((info->args[i][0] == '-' || info->args[i][0] == '+') &&
+		info->args[i][1] != 0)
 			j++;
 		len = ft_strlen(info->args[i]);
 		while (j < len)
@@ -79,14 +83,14 @@ int		is_string(t_info *info)
 	return (1);
 }
 
-int			ft_atoi(const char *str, int i, int *error)
+int	ft_atoi(const char *str, int i, int *error)
 {
 	int					sign;
 	unsigned long long	result;
 
 	i = 0;
-	while (str[0] == '\t' || str[0] == '\n' || str[0] == '\v' ||
-			str[0] == '\f' || str[0] == ' ' || str[0] == '\r')
+	while (str[0] == '\t' || str[0] == '\n' || str[0] == '\v'
+		|| str[0] == '\f' || str[0] == ' ' || str[0] == '\r')
 		str++;
 	result = 0;
 	sign = (str[0] == '-' ? -1 : 1);
@@ -96,29 +100,12 @@ int			ft_atoi(const char *str, int i, int *error)
 	while (str[i] != '\0' && (str[i] >= '0' && str[i] <= '9'))
 	{
 		result = result * 10 + (str[i++] - '0');
-		if ((result > 2147483648ULL && sign == -1) ||
-		(result >= 2147483648ULL && sign == 1))
+		if ((result > 2147483648ULL && sign == -1)
+			|| (result >= 2147483648ULL && sign == 1))
 		{
 			*error = 1;
 			return (sign == 1 ? -1 : 0);
 		}
 	}
 	return (result * sign);
-}
-
-int		to_int(t_info *info)
-{
-	int i;
-	int is_error;
-
-	i = 0;
-	is_error = 0;
-	while (i < info->size_a)
-	{
-		info->stack_a[i] = ft_atoi(info->args[i], 0, &is_error);
-		if (is_error)
-			return 1;
-		i++;
-	}
-	return 0;
 }

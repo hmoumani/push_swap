@@ -6,40 +6,42 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 11:55:02 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/16 14:46:33 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/17 21:33:47 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void insertionSort(t_info *info)
+void	insertionSort(t_info *info)
 {
-    int i;
-	int key;
-	int j;
-	
+	int	i;
+	int	key;
+	int	j;
+
 	i = 1;
-    while (i < info->size_copy) {
-        key = info->copy[i];
-        j = i - 1;
-        while (j >= 0 && info->copy[j] > key) {
-            info->copy[j + 1] = info->copy[j];
-            j = j - 1;
-        }
-        info->copy[j + 1] = key;
+	while (i < info->size_copy)
+	{
+		key = info->copy[i];
+		j = i - 1;
+		while (j >= 0 && info->copy[j] > key)
+		{
+			info->copy[j + 1] = info->copy[j];
+			j = j - 1;
+		}
+		info->copy[j + 1] = key;
 		i++;
-    }
+	}
 }
 
 void	reverse(t_info *info)
 {
-	int i;
-	int temp;
-	int end;
+	int	i;
+	int	temp;
+	int	end;
 
 	end = info->size_a - 1;
 	i = 0;
-	while (i < info->size_a/2) 
+	while (i < info->size_a / 2)
 	{
 		temp = info->stack_a[i];
 		info->stack_a[i] = info->stack_a[end];
@@ -54,9 +56,29 @@ void	reverse(t_info *info)
 		i++;
 	}
 	insertionSort(info);
+}
+
+int	to_int(t_info *info)
+{
+	int	i;
+	int	is_error;
+
 	i = 0;
+	is_error = 0;
 	while (i < info->size_a)
 	{
+		info->stack_a[i] = ft_atoi(info->args[i], 0, &is_error);
+		if (is_error)
+			return (1);
 		i++;
 	}
+	return (0);
+}
+
+void	call_op(char *name, void (*f)(t_info *), t_info *info)
+{
+	write(1, name, ft_strlen(name));
+	write(1, "\n", 1);
+	name = NULL;
+	f(info);
 }
