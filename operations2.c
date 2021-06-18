@@ -6,14 +6,15 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 14:07:20 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/16 14:07:40 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/18 15:05:43 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rrr(t_info *info)
+int	rrr(t_info *info)
 {
 	rra(info);
 	rrb(info);
+	return (0);
 }

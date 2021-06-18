@@ -6,19 +6,19 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 14:06:25 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/16 14:07:36 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/18 15:05:36 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra(t_info *info)
+int	ra(t_info *info)
 {
 	int	temp;
 	int	i;
 
 	if (info->size_a < 1)
-		return ;
+		return -1;
 	i = info->size_a - 2;
 	temp = info->stack_a[info->size_a - 1];
 	while (i >= 0)
@@ -27,15 +27,16 @@ void	ra(t_info *info)
 		i--;
 	}
 	info->stack_a[0] = temp;
+	return (0);
 }
 
-void	rb(t_info *info)
+int	rb(t_info *info)
 {
 	int	temp;
 	int	i;
 
 	if (info->size_b < 1)
-		return ;
+		return -1;
 	i = info->size_b - 2;
 	temp = info->stack_b[info->size_b - 1];
 	while (i >= 0)
@@ -44,15 +45,17 @@ void	rb(t_info *info)
 		i--;
 	}
 	info->stack_b[0] = temp;
+	return (0);
 }
 
-void	rr(t_info *info)
+int	rr(t_info *info)
 {
 	ra(info);
 	rb(info);
+	return (0);
 }
 
-void	rra(t_info *info)
+int	rra(t_info *info)
 {
 	int	temp;
 	int	i;
@@ -65,9 +68,10 @@ void	rra(t_info *info)
 		i++;
 	}
 	info->stack_a[i] = temp;
+	return (0);
 }
 
-void	rrb(t_info *info)
+int	rrb(t_info *info)
 {
 	int	temp;
 	int	i;
@@ -80,4 +84,5 @@ void	rrb(t_info *info)
 		i++;
 	}
 	info->stack_b[i] = temp;
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 11:55:02 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/17 21:33:47 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/18 15:07:05 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,13 @@ int	to_int(t_info *info)
 	return (0);
 }
 
-void	call_op(char *name, void (*f)(t_info *), t_info *info)
+void	call_op(char *name, int (*f)(t_info *), t_info *info)
 {
-	write(1, name, ft_strlen(name));
-	write(1, "\n", 1);
+	ll++;
+	if (f(info) != -1)
+	{
+		write(1, name, ft_strlen(name));
+		write(1, "\n", 1);
+	}
 	name = NULL;
-	f(info);
 }
