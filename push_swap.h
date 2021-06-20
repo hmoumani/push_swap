@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:23:32 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/18 21:21:44 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/20 20:07:45 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ int	rra(t_info *info);
 int	rrb(t_info *info);
 int	rrr(t_info *info);
 void	call_op(char *name, int (*f)(t_info *), t_info *info);
+int		is_sorted(int *t, int len);
+
 
 #endif

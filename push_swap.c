@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:23:42 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/18 21:31:30 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/20 21:57:06 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,30 +98,20 @@ void	redirect_operation(t_info *info, int first_top, int first_bottom)
 {
 	if (first_top - 1 <= first_bottom)
 	{
-		// printf("%d * %d: [%d]\n", first_top, first_bottom, first_top);
-		// printf("%d * %d\n", first_top, info->stack_a[first_top]);
 		while (first_top > 0)
 		{
-			// ra(info);
 			call_op("ra", ra, info);
 			first_top--;
 		}
-		// pb(info);
-		// printf("%d\n", info->size_a);
 		call_op("pb", pb, info);
 	}
 	else
 	{
-		// printf("%d * %d\n", first_bottom, info->stack_a[first_bottom]);
-		// printf("%d * %d: [%d]\n", first_top, first_bottom, first_bottom);
 		while (first_bottom >= 0)
 		{
-			// rra(info);
 			call_op("rra", rra, info);
 			first_bottom--;
 		}
-		// pb(info);
-			// printf("%d\n", info->stack_a[info->size_a - 1]);
 		call_op("pb", pb, info);
 
 	}
@@ -131,29 +121,22 @@ void	last_operations(t_info *info, int first_top, int first_bottom)
 {
 	if (first_top - 1 <= first_bottom)
 	{
-		// printf("%d * %d: [%d]\n", first_top, first_bottom, first_top);
 		while (first_top > 0)
 		{
-			// rb(info);
 			call_op("rb", rb, info);
 			first_top--;
 		}
-		// pa(info);
 		call_op("pa", pa, info);
 	}
 	else
 	{
-		// printf("%d * %d: [%d]\n", first_top, first_bottom, first_bottom);
 		while (first_bottom >= 0)
 		{
-			// rrb(info);
 			call_op("rrb", rrb, info);
 			first_bottom--;
 		}
-		// pa(info);
 		call_op("pa", pa, info);
 	}
-	// test_op(info);
 }
 
 void	handle_chunk(t_info *info, t_curr_chunk	*curr)
@@ -164,16 +147,10 @@ void	handle_chunk(t_info *info, t_curr_chunk	*curr)
 	int j;
 
 	j = curr->end - curr->start - 1;
-	
-	// printf("%d\n", j);
-	// for (int i = 0; i < info->size_a; i++)
-	// {
-	// 	printf("%d * ", info->stack_a[i]);
-	// }
+
 
 	while (j >= 0)
 	{
-		// printf("\n");
 		first_top = 0;
 		i = info->size_a - 1;
 		while (i >= 0)
@@ -194,9 +171,6 @@ void	handle_chunk(t_info *info, t_curr_chunk	*curr)
 		}
 		first_bottom = i;
 		redirect_operation(info, first_top, first_bottom);
-		// printf("%d * %d\n", first_top, first_bottom);
-		// test_op(info);
-		// printf("******************\n");
 		j--;
 	}
 }
@@ -207,29 +181,28 @@ void	fill_b(t_info *info)
 
 	curr.start = 0;
 	curr.end = CHUNK_SIZE;
-	if (curr.end > info->size_copy)
-		curr.end = info->size_copy;
-	while (curr.start <= info->size_copy - 1)
+	if (curr.end > info->size_copy - 3)
+		curr.end = info->size_copy - 3;
+	while (curr.start <= info->size_copy - 4)
 	{
 		handle_chunk(info, &curr);
-		// printf("%d * %d\n", curr.start, curr.end);
+		// printf("%d ***** %d\n", curr.start, curr.end);
 		curr.start = curr.end;
 		curr.end = curr.end + CHUNK_SIZE;
-		if (curr.end > info->size_copy)
-			curr.end = info->size_copy;
+		if (curr.end > info->size_copy - 3)
+			curr.end = info->size_copy - 3;
 	}
 }
 
 void	fill_a(t_info *info)
 {
-	int i = info->size_copy - 1;
+	int i = info->size_copy - 4;
 	int j;
 	int first_top;
 	int first_bottom;
 
 	while (i >= 0)
 	{
-		// printf("%d\n", info->stack_a[i]);
 		first_top = 0;
 		first_bottom = 0;
 		j = info->size_b - 1;
@@ -249,11 +222,67 @@ void	fill_a(t_info *info)
 			j++;
 		}
 		last_operations(info, first_top, first_bottom);
-		// printf("%d * %d\n", first_top, first_bottom);
-		// test_op(info);
-		// printf("******************\n");
 		i--;
 	}
+}
+
+int		get_max_pos(t_info *info)
+{
+	int i;
+	int max;
+	int pos;
+
+	i = 1;
+	max = info->stack_a[0];
+	pos = 0;
+	while (i < info->size_a)
+	{
+		if (max < info->stack_a[i])
+		{
+			pos = i;
+			max = info->stack_a[i];
+		}
+		i++;
+	}
+	return (pos);
+}
+
+void	handle_three(t_info *info)
+{
+	// printf("%d\n", get_max_pos(info));
+	// for (int i = 0; i < info->size_a; i++)
+	// {
+	// 	printf("%d *", info->stack_a[i]);
+	// }
+	// printf("\n");
+	int pos = get_max_pos(info);
+	if (pos == 0)
+		call_op("sa", sa, info);
+	else if (pos == 1)
+	{
+		if (info->stack_a[0] < info->stack_a[2])
+			call_op("rra", rra, info);
+		else
+		{
+			call_op("sa", sa, info);
+			call_op("ra", ra, info);
+		}
+	}
+	else
+	{
+		if (info->stack_a[0] < info->stack_a[1])
+		{
+			call_op("sa", sa, info);
+			call_op("rra", rra, info);
+		}
+		else
+			call_op("ra", ra, info);
+	}
+	// for (int i = 0; i < info->size_a; i++)
+	// {
+	// 	printf("%d *", info->stack_a[i]);
+	// }
+	// printf("\n");
 }
 
 int		main(int argc, char **argv)
@@ -261,12 +290,6 @@ int		main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	ll= 0;
-	
-	// for (int i = 1; i < argc; i++)
-	// {
-	// 	printf("\"%s\" ", argv[i]);
-	// }
-	// return 1;
 	t_info info;
 	info.size_a = argc - 1;
 	info.size_copy = argc - 1;
@@ -274,21 +297,18 @@ int		main(int argc, char **argv)
 	info.args = argv + 1;
 	if (check_argv(&info) == 1)
 		return (1);
-	// for (int i = 0; i < info.size_copy; i++)
-	// {
-	// 	printf("%d * ", info.copy[i]);
-	// }
-	// printf("\n");
-
+	if (is_sorted(info.stack_a, info.size_a))
+		return (0);
 	fill_b(&info);
 	// for (int i = 0; i < info.size_b; i++)
 	// {
-	// 	printf("%d * ", info.stack_b[i]);
+	// 	printf("%d *", info.stack_b[i]);
 	// }
+	// printf("\n");
+	handle_three(&info);
 	fill_a(&info);
 	// for (int i = 0; i < info.size_a; i++)
 	// {
-	// 	printf("%d * ", info.stack_a[i]);
+	// 	printf("%d *", info.stack_a[i]);
 	// }
-	return (0);
 }

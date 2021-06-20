@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 11:55:02 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/18 21:29:46 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/20 21:55:00 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,18 @@ void	call_op(char *name, int (*f)(t_info *), t_info *info)
 		write(1, "\n", 1);
 	}
 	name = NULL;
+}
+
+int		is_sorted(int *t, int len)
+{
+	int i;
+
+	i = 0;
+	while (i < len - 1)
+	{
+		if (t[i] < t[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
 }
