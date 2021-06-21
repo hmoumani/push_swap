@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:23:42 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/21 15:06:15 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/21 16:28:05 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ int		check_argv(t_info *info)
 	if (check_dup(info) == 1)
 		return ft_error("Error\n", info->stack_a, info->stack_b, info->copy);
 	reverse(info);
+	info->chunk_size = 16;
+	if (info->size_a > 150)
+		info->chunk_size = info->size_a / 12;
 	return 0;
 }
 
@@ -180,7 +183,7 @@ void	fill_b(t_info *info)
 	t_curr_chunk	curr;
 
 	curr.start = 0;
-	curr.end = CHUNK_SIZE;
+	curr.end = info->chunk_size;
 	if (curr.end > info->size_copy - 3)
 		curr.end = info->size_copy - 3;
 	while (curr.start <= info->size_copy - 4)
@@ -188,7 +191,7 @@ void	fill_b(t_info *info)
 		handle_chunk(info, &curr);
 		// printf("%d ***** %d\n", curr.start, curr.end);
 		curr.start = curr.end;
-		curr.end = curr.end + CHUNK_SIZE;
+		curr.end = curr.end + info->chunk_size;
 		if (curr.end > info->size_copy - 3)
 			curr.end = info->size_copy - 3;
 	}

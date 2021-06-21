@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 11:55:02 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/21 13:25:36 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/21 18:24:19 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,24 @@ int		is_sorted(int *t, int len)
 		i++;
 	}
 	return (1);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t			i;
+	unsigned char	*str1;
+	unsigned char	*str2;
+
+	i = 0;
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	while (i < n)
+	{
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+		if (str2[i] == '\0' && str1[i] == '\0')
+			return (0);
+		i++;
+	}
+	return (0);
 }
