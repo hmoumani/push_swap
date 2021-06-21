@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:23:42 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/20 21:57:06 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/21 15:06:15 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,8 +256,11 @@ void	handle_three(t_info *info)
 	// }
 	// printf("\n");
 	int pos = get_max_pos(info);
-	if (pos == 0)
-		call_op("sa", sa, info);
+	if (pos == 0 )
+	{
+		if (info->stack_a[1] < info->stack_a[2])
+			call_op("sa", sa, info);
+	}
 	else if (pos == 1)
 	{
 		if (info->stack_a[0] < info->stack_a[2])
@@ -299,16 +302,23 @@ int		main(int argc, char **argv)
 		return (1);
 	if (is_sorted(info.stack_a, info.size_a))
 		return (0);
-	fill_b(&info);
-	// for (int i = 0; i < info.size_b; i++)
-	// {
-	// 	printf("%d *", info.stack_b[i]);
-	// }
-	// printf("\n");
-	handle_three(&info);
-	fill_a(&info);
 	// for (int i = 0; i < info.size_a; i++)
 	// {
-	// 	printf("%d *", info.stack_a[i]);
+	// 	fprintf(stderr, "%s *", info.args[i]);
 	// }
+	// fprintf(stderr, "\n");
+	fill_b(&info);
+	// for (int i = 0; i < info.size_a; i++)
+	// {
+	// 	fprintf(stderr ,"%d *", info.stack_a[i]);
+	// }
+	// fprintf(stderr, "*********\n");
+	handle_three(&info);
+	// fprintf(stderr, "*********\n");
+	// for (int i = 0; i < info.size_a; i++)
+	// {
+	// 	fprintf(stderr ,"%d *", info.stack_a[i]);
+	// }
+	// fprintf(stderr, "\n");
+	fill_a(&info);
 }
