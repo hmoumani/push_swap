@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:23:32 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/21 20:14:46 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/21 21:24:55 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,11 @@ int		rrb(t_info *info);
 int		rrr(t_info *info);
 void	call_op(char *name, int (*f)(t_info *), t_info *info);
 int		is_sorted(int *t, int len);
+int		init_args(t_info *info);
+int		check_argv(t_info *info);
+int		in_chunk(int val, t_info *info, t_curr_chunk *curr);
+void	redirect_operation(t_info *info, int first_top, int first_bottom);
+int		get_max_pos(t_info *info);
+void	last_operations(t_info *info, int first_top, int first_bottom);
 
 #endif

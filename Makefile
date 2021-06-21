@@ -6,7 +6,7 @@
 #    By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/15 18:50:07 by hmoumani          #+#    #+#              #
-#    Updated: 2021/06/21 20:26:46 by hmoumani         ###   ########.fr        #
+#    Updated: 2021/06/21 21:37:05 by hmoumani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,11 @@ re: fclean $(NAME)
 
 clean:
 	rm -rf $(NAME)
+	rm -rf $(BONUS)
 
-bonus:
+$(BONUS):$(BONUS_SRC)
 	gcc $(FLAGS) $(BONUS_SRC) -o $(BONUS)
+
+bonus: $(BONUS)
 
 fclean: clean

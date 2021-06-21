@@ -6,13 +6,13 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 16:34:16 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/21 20:25:22 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/21 21:47:40 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-int	init_args(t_info *info)
+int	init_args_bonus(t_info *info)
 {
 	info->stack_a = malloc(info->size_a * sizeof(int));
 	if (!info->stack_a)
@@ -23,13 +23,13 @@ int	init_args(t_info *info)
 	return (0);
 }
 
-int	check_argv(t_info *info)
+int	check_argv_bonus(t_info *info)
 {
 	info->stack_a = NULL;
 	info->stack_b = NULL;
 	if (!is_string(info))
 		return (ft_error("Error\n", NULL, NULL, NULL));
-	if (init_args(info))
+	if (init_args_bonus(info))
 		return (ft_error("Error\n", info->stack_a, info->stack_b, NULL));
 	if (to_int(info))
 		return (ft_error("Error\n", info->stack_a, info->stack_b, NULL));
@@ -82,7 +82,7 @@ int	main(int argc, char **argv)
 	info.args = argv + 1;
 	if (argc == 1)
 		return (0);
-	if (check_argv(&info))
+	if (check_argv_bonus(&info))
 		return (1);
 	reverse_bonus(&info);
 	while (ret != 0)
@@ -95,4 +95,5 @@ int	main(int argc, char **argv)
 		write(1, "OK", 2);
 	else
 		write(1, "KO", 2);
+	ft_error("", info.stack_b, info.stack_a, NULL);
 }
