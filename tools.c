@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:38:51 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/16 14:55:03 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/21 20:12:01 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,31 +56,13 @@ int	check_dup(t_info *info)
 	return (0);
 }
 
-int	is_string(t_info *info)
+void	sign_(int *sign, const char **str)
 {
-	int	i;
-	int	j;
-	int	len;
-
-	i = 0;
-	while (i < info->size_a)
-	{
-		j = 0;
-		if ((info->args[i][0] == '-' || info->args[i][0] == '+') &&
-		info->args[i][1] != 0)
-			j++;
-		len = ft_strlen(info->args[i]);
-		while (j < len)
-		{
-			if (info->args[i][j] < '0' || info->args[i][j] > '9')
-			{
-				return (0);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (1);
+	*sign = 1;
+	if ((*str)[0] == '-')
+		*sign = -1;
+	if ((*str)[0] == '-' || (*str)[0] == '+')
+		*str = *str + 1;
 }
 
 int	ft_atoi(const char *str, int i, int *error)
@@ -93,8 +75,7 @@ int	ft_atoi(const char *str, int i, int *error)
 		|| str[0] == '\f' || str[0] == ' ' || str[0] == '\r')
 		str++;
 	result = 0;
-	sign = (str[0] == '-' ? -1 : 1);
-	str = (str[0] == '-' || str[0] == '+') ? str + 1 : str;
+	sign_(&sign, &str);
 	while (str[0] == '0')
 		str++;
 	while (str[i] != '\0' && (str[i] >= '0' && str[i] <= '9'))
@@ -104,7 +85,7 @@ int	ft_atoi(const char *str, int i, int *error)
 			|| (result >= 2147483648ULL && sign == 1))
 		{
 			*error = 1;
-			return (sign == 1 ? -1 : 0);
+			return (-1);
 		}
 	}
 	return (result * sign);

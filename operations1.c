@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 14:06:25 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/18 15:05:36 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/21 20:15:48 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ra(t_info *info)
 	int	i;
 
 	if (info->size_a < 1)
-		return -1;
+		return (-1);
 	i = info->size_a - 2;
 	temp = info->stack_a[info->size_a - 1];
 	while (i >= 0)
@@ -36,7 +36,7 @@ int	rb(t_info *info)
 	int	i;
 
 	if (info->size_b < 1)
-		return -1;
+		return (-1);
 	i = info->size_b - 2;
 	temp = info->stack_b[info->size_b - 1];
 	while (i >= 0)
