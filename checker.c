@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 16:34:16 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/21 21:47:40 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:11:00 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_argv_bonus(t_info *info)
 	if (!is_string(info))
 		return (ft_error("Error\n", NULL, NULL, NULL));
 	if (init_args_bonus(info))
-		return (ft_error("Error\n", info->stack_a, info->stack_b, NULL));
+		return (1);
 	if (to_int(info))
 		return (ft_error("Error\n", info->stack_a, info->stack_b, NULL));
 	if (check_dup(info) == 1)
@@ -92,8 +92,8 @@ int	main(int argc, char **argv)
 			return (1);
 	}
 	if (is_a_sorted(info.stack_a, info.size_a))
-		write(1, "OK", 2);
+		write(1, "OK\n", 3);
 	else
-		write(1, "KO", 2);
+		write(1, "KO\n", 3);
 	ft_error("", info.stack_b, info.stack_a, NULL);
 }

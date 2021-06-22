@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 20:01:19 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/21 21:13:47 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/22 11:31:00 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	check_argv(t_info *info)
 	if (!is_string(info))
 		return (ft_error("Error\n", NULL, NULL, NULL));
 	if (init_args(info))
-		return (ft_error("Error\n", info->stack_a, info->stack_b, info->copy));
+		return (1);
 	if (to_int(info))
 		return (ft_error("Error\n", info->stack_a, info->stack_b, info->copy));
 	if (check_dup(info) == 1)
