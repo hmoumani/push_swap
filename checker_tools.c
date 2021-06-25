@@ -22,7 +22,7 @@ int	handle_op1(t_info *info, char *line)
 		rrb(info);
 	else if (!ft_strncmp(line, "rrr", 4))
 		rrr(info);
-	else if (ft_strncmp(line, "", 1))
+	else
 	{
 		free(line);
 		return (ft_error("Error\n", info->stack_a, info->stack_b, NULL));

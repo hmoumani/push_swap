@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 20:01:19 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/22 11:31:00 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/22 15:21:45 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	is_string(t_info *info)
 	i = 0;
 	while (i < info->size_a)
 	{
+		if (info->args[i][0] == 0)
+			return (0);
 		j = 0;
 		if ((info->args[i][0] == '-' || info->args[i][0] == '+') &&
 		info->args[i][1] != 0)

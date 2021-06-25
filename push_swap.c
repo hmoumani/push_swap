@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:23:42 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/22 10:41:15 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/06/22 15:25:07 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,11 @@ int	main(int argc, char **argv)
 	if (is_sorted(info.stack_a, info.size_a))
 	{
 		ft_error("", info.stack_a, info.stack_b, info.copy);
+		return (0);
+	}
+	if (argc == 3)
+	{
+		call_op("sa", sa, &info);
 		return (0);
 	}
 	fill_b(&info);

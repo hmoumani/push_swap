@@ -24,7 +24,7 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-int	ft_error(char *s, int *p, int *p2, int *p3)
+int	ft_error(char *s, int *p, int *p2, void *p3)
 {
 	free(p);
 	free(p2);

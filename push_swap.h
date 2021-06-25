@@ -35,7 +35,7 @@ typedef struct s_curr_chunk
 	int	end;
 }				t_curr_chunk;
 
-int		ft_error(char *s, int *p, int *p2, int *p3);
+int		ft_error(char *s, int *p, int *p2, void *p3);
 int		ft_strlen(char *s);
 int		check_dup(t_info *info);
 int		is_string(t_info *info);
