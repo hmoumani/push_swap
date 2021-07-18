@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:23:42 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/22 15:25:07 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/07/18 17:32:56 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	handle_chunk(t_info *info, t_curr_chunk	*curr, int j)
 {
 	int	first_top;
 	int	i;
+	int	temp;
 
 	while (j >= 0)
 	{
@@ -28,6 +29,8 @@ void	handle_chunk(t_info *info, t_curr_chunk	*curr, int j)
 			first_top++;
 			i--;
 		}
+		temp = info->stack_a[i];
+		// printf("1 - %d\n", info->stack_a[i]);
 		i = 0;
 		while (i < info->size_a)
 		{
@@ -35,7 +38,8 @@ void	handle_chunk(t_info *info, t_curr_chunk	*curr, int j)
 				break ;
 			i++;
 		}
-		redirect_operation(info, first_top, i);
+		// printf("2 - %d\n", info->stack_a[i]);
+		redirect_operation(info, first_top, i, temp, info->stack_a[i], (curr->start + curr->end) / 2);
 		j--;
 	}
 }
@@ -51,6 +55,8 @@ void	fill_b(t_info *info)
 	while (curr.start <= info->size_copy - 4)
 	{
 		handle_chunk(info, &curr, curr.end - curr.start - 1);
+		if (info->size_copy > 100)
+			info->chunk_size = info->size_a / 6 + 1;
 		curr.start = curr.end;
 		curr.end = curr.end + info->chunk_size;
 		if (curr.end > info->size_copy - 3)

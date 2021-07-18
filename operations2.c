@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 14:07:20 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/21 21:17:06 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/07/18 17:42:59 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	last_operations(t_info *info, int first_top, int first_bottom)
 	}
 }
 
-void	redirect_operation(t_info *info, int first_top, int first_bottom)
+void	redirect_operation(t_info *info, int first_top, int first_bottom, int first_num, int sec_num, int med)
 {
 	if (first_top - 1 <= first_bottom)
 	{
@@ -51,6 +51,11 @@ void	redirect_operation(t_info *info, int first_top, int first_bottom)
 			first_top--;
 		}
 		call_op("pb", pb, info);
+		if (first_num > med)
+			call_op("rb", rb, info);
+		(void)first_num;
+		(void)sec_num;
+		(void)med;
 	}
 	else
 	{
@@ -60,7 +65,12 @@ void	redirect_operation(t_info *info, int first_top, int first_bottom)
 			first_bottom--;
 		}
 		call_op("pb", pb, info);
+		if (sec_num > med)
+			call_op("rb", rb, info);
 	}
+	// printf("first_top : %d \n", info->stack_a[first_top]);
+	// printf("first_bottom : %d \n", info->stack_a[info->size_a - first_bottom]);
+	// printf("chunk size = %d\n", info->chunk_size);
 }
 
 int	get_max_pos(t_info *info)

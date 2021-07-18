@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 20:01:19 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/06/22 15:21:45 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/07/18 17:38:50 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,34 @@ int	init_args(t_info *info)
 	return (0);
 }
 
+void	num_to_index(t_info *info)
+{
+	int	i;
+	int	j;
+	int count;
+
+	i = 0;
+	while (i < info->size_a)
+	{
+		j = 0;
+		count = 0;
+		while (j < info->size_a)
+		{
+			if (info->stack_a[i] > info->stack_a[j])
+				count++;
+			++j;
+		}
+		info->copy[i] = count;
+		++i;
+	}
+	i = 0;
+	while (i < info->size_a)
+	{
+		info->stack_a[i] = info->copy[i];
+		++i;
+	}
+}
+
 int	check_argv(t_info *info)
 {
 	if (!is_string(info))
@@ -85,10 +113,12 @@ int	check_argv(t_info *info)
 		return (ft_error("Error\n", info->stack_a, info->stack_b, info->copy));
 	if (check_dup(info) == 1)
 		return (ft_error("Error\n", info->stack_a, info->stack_b, info->copy));
+	num_to_index(info);
 	reverse(info);
-	info->chunk_size = 16;
-	if (info->size_a > 150)
-		info->chunk_size = info->size_a / 12;
+	if (info->size_a <= 100)
+		info->chunk_size = info->size_a / 3;
+	else
+		info->chunk_size = info->size_a / 6 + 1;
 	return (0);
 }
 
