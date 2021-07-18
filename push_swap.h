@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:23:32 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/07/18 17:18:14 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/07/18 19:41:57 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include<string.h>
+# include <string.h>
 
 typedef struct s_info
 {

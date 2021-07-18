@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:23:42 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/07/18 17:32:56 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/07/18 19:48:11 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	fill_b(t_info *info)
 	while (curr.start <= info->size_copy - 4)
 	{
 		handle_chunk(info, &curr, curr.end - curr.start - 1);
-		if (info->size_copy > 100)
+		if (info->size_copy > 100 && info->chunk_size > 30)
 			info->chunk_size = info->size_a / 6 + 1;
 		curr.start = curr.end;
 		curr.end = curr.end + info->chunk_size;
@@ -144,6 +144,7 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	fill_b(&info);
+	// printf("%d\n", info.size_a);
 	handle_three(&info);
 	fill_a(&info, info.size_copy - 4);
 	ft_error("", info.stack_a, info.stack_b, info.copy);

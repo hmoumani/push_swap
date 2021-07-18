@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 14:07:20 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/07/18 17:42:59 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/07/18 19:44:47 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	last_operations(t_info *info, int first_top, int first_bottom)
 
 void	redirect_operation(t_info *info, int first_top, int first_bottom, int first_num, int sec_num, int med)
 {
+	// fprintf(stderr, "%d\n", med);
 	if (first_top - 1 <= first_bottom)
 	{
 		while (first_top > 0)
