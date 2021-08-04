@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:23:42 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/07/18 19:48:11 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/08/04 16:33:18 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,6 @@ void	handle_chunk(t_info *info, t_curr_chunk *curr, int j)
 	}
 }
 
-void	config_chunk(t_info *info)
-{
-	if (info->size_copy > 100 && info->chunk_size > 20)
-		info->chunk_size = info->size_a / 6 + 1;
-	if (info->size_a > 300 && info->size_a < 500)
-		info->chunk_size = info->size_a / 6 + 1;
-	if (info->size_a > 100 && info->size_a < 300)
-		info->chunk_size = info->size_a / 4 + 1;
-	if (info->size_a < 50)
-		info->chunk_size = info->size_a / 3;
-	else if (info->size_a > 50 && info->size_a < 100)
-		info->chunk_size = info->size_a / 4;
-	if (info->size_a < 25)
-		info->chunk_size = info->size_a;
-}
-
 void	fill_b(t_info *info)
 {
 	t_curr_chunk	curr;
@@ -75,49 +59,18 @@ void	fill_b(t_info *info)
 	}
 }
 
-void	save_less(t_info *info, int *j, int i,int op)
-{
-	if (op)
-	{
-		while (info->stack_b[*j] > info->stack_a[0] && info->stack_b[*j] < info->copy[i])
-		{
-			call_op("pa", pa, info);
-			call_op("ra", ra, info);
-			*j = info->size_b - 1;
-		}
-	}
-	else
-	{
-		while (info->stack_b[0] > info->stack_a[0] && info->stack_b[0] < info->copy[i])
-		{
-			call_op("rrb", rrb, info);
-			call_op("pa", pa, info);
-			call_op("ra", ra, info);
-		}
-	}
-}
-
 void	fill_a(t_info *info, int i)
 {
 	int	j;
 	int	first_top;
 
-	info->stack_a[0] = -42;
 	while (i >= 0)
 	{
-		while (info->copy[i] == info->stack_a[0])
-		{
+		while (info->copy[i--] == info->stack_a[0])
 			call_op("rra", rra, info);
-			--i;
-		}
+		i++;
 		first_top = 0;
 		j = info->size_b - 1;
-		// while (info->stack_b[j] > info->stack_a[0] && info->stack_b[j] < info->copy[i])
-		// {
-		// 	call_op("pa", pa, info);
-		// 	call_op("ra", ra, info);
-		// 	j = info->size_b - 1;
-		// }
 		save_less(info, &j, i, 1);
 		while (j >= 0)
 		{
@@ -125,12 +78,6 @@ void	fill_a(t_info *info, int i)
 				break ;
 			first_top++;
 		}
-		// while (info->stack_b[0] > info->stack_a[0] && info->stack_b[0] < info->copy[i])
-		// {
-		// 	call_op("rrb", rrb, info);
-		// 	call_op("pa", pa, info);
-		// 	call_op("ra", ra, info);
-		// }
 		save_less(info, &j, i, 0);
 		j = 0;
 		while (j < info->size_b)
@@ -141,7 +88,7 @@ void	fill_a(t_info *info, int i)
 	}
 }
 
-void handle_three(t_info *info)
+void	handle_three(t_info *info)
 {
 	if (get_max_pos(info) == 0)
 	{
@@ -170,9 +117,9 @@ void handle_three(t_info *info)
 	}
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_info info;
+	t_info	info;
 
 	if (argc == 1)
 		return (0);
@@ -193,12 +140,8 @@ int main(int argc, char **argv)
 		return (0);
 	}
 	fill_b(&info);
-	// printf("%d\n", info.size_a);
 	handle_three(&info);
+	info.stack_a[0] = -42;
 	fill_a(&info, info.size_copy - 4);
-	// for (int i = 0; i < info.size_a; ++i){
-	// 	printf("%d*", info.stack_a[i]);
-	// }
 	ft_error("", info.stack_a, info.stack_b, info.copy);
-	return (0);
 }

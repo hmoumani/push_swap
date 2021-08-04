@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools3.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/04 16:33:42 by hmoumani          #+#    #+#             */
+/*   Updated: 2021/08/04 16:33:43 by hmoumani         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	num_to_index(t_info *info)
@@ -25,4 +37,44 @@ void	num_to_index(t_info *info)
 		info->stack_a[i] = info->copy[i];
 		++i;
 	}
+}
+
+void	save_less(t_info *info, int *j, int i, int op)
+{
+	if (op)
+	{
+		while (info->stack_b[*j] > info->stack_a[0]
+			&& info->stack_b[*j] < info->copy[i])
+		{
+			call_op("pa", pa, info);
+			call_op("ra", ra, info);
+			*j = info->size_b - 1;
+		}
+	}
+	else
+	{
+		while (info->stack_b[0] > info->stack_a[0]
+			&& info->stack_b[0] < info->copy[i])
+		{
+			call_op("rrb", rrb, info);
+			call_op("pa", pa, info);
+			call_op("ra", ra, info);
+		}
+	}
+}
+
+void	config_chunk(t_info *info)
+{
+	if (info->size_copy > 100 && info->chunk_size > 20)
+		info->chunk_size = info->size_a / 6 + 1;
+	if (info->size_a > 300 && info->size_a < 500)
+		info->chunk_size = info->size_a / 6 + 1;
+	if (info->size_a > 100 && info->size_a < 300)
+		info->chunk_size = info->size_a / 4 + 1;
+	if (info->size_a < 50)
+		info->chunk_size = info->size_a / 3;
+	else if (info->size_a > 50 && info->size_a < 100)
+		info->chunk_size = info->size_a / 4;
+	if (info->size_a < 25)
+		info->chunk_size = info->size_a;
 }

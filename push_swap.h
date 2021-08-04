@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:23:32 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/07/18 19:41:57 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/08/04 16:33:21 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,7 @@ void	redirect_op(t_info *info, int first_top, int first_bottom,
 int		get_max_pos(t_info *info);
 void	last_operations(t_info *info, int first_top, int first_bottom);
 void	num_to_index(t_info *info);
+void	save_less(t_info *info, int *j, int i, int op);
+void	config_chunk(t_info *info);
 
 #endif
