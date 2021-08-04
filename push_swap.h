@@ -35,6 +35,13 @@ typedef struct s_curr_chunk
 	int	end;
 }				t_curr_chunk;
 
+typedef struct s_median
+{
+	int	first_num;
+	int	sec_num;
+	int	med;
+}				t_med;
+
 int		ft_error(char *s, int *p, int *p2, void *p3);
 int		ft_strlen(char *s);
 int		check_dup(t_info *info);
@@ -58,8 +65,10 @@ int		is_sorted(int *t, int len);
 int		init_args(t_info *info);
 int		check_argv(t_info *info);
 int		in_chunk(int val, t_info *info, t_curr_chunk *curr);
-void	redirect_operation(t_info *info, int first_top, int first_bottom, int first_num, int sec_num, int med);
+void	redirect_op(t_info *info, int first_top, int first_bottom,
+			t_med *op_info);
 int		get_max_pos(t_info *info);
 void	last_operations(t_info *info, int first_top, int first_bottom);
+void	num_to_index(t_info *info);
 
 #endif

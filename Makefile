@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS=push_swap.c tools.c tools1.c tools2.c operations.c operations1.c operations2.c
+SRCS=push_swap.c tools.c tools1.c tools2.c operations.c operations1.c operations2.c tools3.c
 
 FLAGS=-Wextra -Wall -Werror
 

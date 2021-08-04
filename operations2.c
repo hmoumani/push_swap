@@ -41,37 +41,30 @@ void	last_operations(t_info *info, int first_top, int first_bottom)
 	}
 }
 
-void	redirect_operation(t_info *info, int first_top, int first_bottom, int first_num, int sec_num, int med)
+void	redirect_op(t_info *info, int f_top, int first, t_med *op_info)
 {
-	// fprintf(stderr, "%d\n", med);
-	if (first_top - 1 <= first_bottom)
+	if (f_top - 1 <= first)
 	{
-		while (first_top > 0)
+		while (f_top > 0)
 		{
 			call_op("ra", ra, info);
-			first_top--;
+			f_top--;
 		}
 		call_op("pb", pb, info);
-		if (first_num > med)
+		if (op_info->first_num > op_info->med / 2)
 			call_op("rb", rb, info);
-		(void)first_num;
-		(void)sec_num;
-		(void)med;
 	}
 	else
 	{
-		while (first_bottom >= 0)
+		while (first >= 0)
 		{
 			call_op("rra", rra, info);
-			first_bottom--;
+			first--;
 		}
 		call_op("pb", pb, info);
-		if (sec_num > med)
+		if (op_info->sec_num > op_info->med / 2)
 			call_op("rb", rb, info);
 	}
-	// printf("first_top : %d \n", info->stack_a[first_top]);
-	// printf("first_bottom : %d \n", info->stack_a[info->size_a - first_bottom]);
-	// printf("chunk size = %d\n", info->chunk_size);
 }
 
 int	get_max_pos(t_info *info)

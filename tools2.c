@@ -75,34 +75,6 @@ int	init_args(t_info *info)
 	return (0);
 }
 
-void	num_to_index(t_info *info)
-{
-	int	i;
-	int	j;
-	int count;
-
-	i = 0;
-	while (i < info->size_a)
-	{
-		j = 0;
-		count = 0;
-		while (j < info->size_a)
-		{
-			if (info->stack_a[i] > info->stack_a[j])
-				count++;
-			++j;
-		}
-		info->copy[i] = count;
-		++i;
-	}
-	i = 0;
-	while (i < info->size_a)
-	{
-		info->stack_a[i] = info->copy[i];
-		++i;
-	}
-}
-
 int	check_argv(t_info *info)
 {
 	if (!is_string(info))
@@ -116,9 +88,9 @@ int	check_argv(t_info *info)
 	num_to_index(info);
 	reverse(info);
 	if (info->size_a <= 100)
-		info->chunk_size = info->size_a / 3;
+		info->chunk_size = info->size_a / 4 + 1;
 	else
-		info->chunk_size = info->size_a / 6 + 1;
+		info->chunk_size = info->size_a / 8 + 1;
 	return (0);
 }
 

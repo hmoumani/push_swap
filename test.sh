@@ -245,6 +245,7 @@ echo "\n\t\t\t 🤹🏻‍♀️  RANDOM VALUES TEST 🤹🏻‍♀️ \n"
 for ((i = 0; i < $count; i++))
 do
 ARG=`ruby -e "puts ($from..$to).to_a.shuffle.join(' ')"` ; res=$(./push_swap $ARG | wc -l)
+# echo $ARG
 if [ $dif -eq 100 ]
 then
 if [ $res -gt 1500 ]
@@ -266,6 +267,7 @@ let "sred += $res"
 elif [ $res -gt 700 ]
 then
 echo "Test result on $from..$to randoms: \033[36m$res\033[m   4️⃣  ❕  5️⃣     ✅  ✅  ✅  ✅"
+echo $ARG
 let "sred += $res"
 elif [ $res -gt 0 ]
 then
@@ -294,6 +296,7 @@ elif [ $res -gt 5500 ]
 then
 echo "Test result on $from..$to randoms: \033[36m$res\033[m   4️⃣  ❕  5️⃣     ✅  ✅  ✅  ✅"
 let "sred += $res"
+echo $ARG
 elif [ $res -gt 0 ]
 then
 echo "Test result on $from..$to randoms: \033[36m$res\033[m   5️⃣  ❕  5️⃣     ✅  ✅  ✅  ✅  ✅"
