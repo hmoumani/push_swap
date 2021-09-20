@@ -6,7 +6,7 @@
 #    By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/15 18:50:07 by hmoumani          #+#    #+#              #
-#    Updated: 2021/06/22 15:27:14 by hmoumani         ###   ########.fr        #
+#    Updated: 2021/09/20 18:11:27 by hmoumani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAME=push_swap
 
 BONUS=checker
 
-BONUS_SRC=checker.c tools.c tools1.c tools2.c get_next_line/get_next_line.c \
+BONUS_SRC=checker.c tools.c tools1.c tools2.c tools3.c get_next_line/get_next_line.c \
 get_next_line/get_next_line_utils.c operations.c operations1.c operations2.c \
 checker_tools.c
 

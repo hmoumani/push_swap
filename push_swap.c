@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:23:42 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/08/04 16:33:18 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/09/20 18:12:21 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,12 @@ void	fill_b(t_info *info)
 	}
 }
 
-void	fill_a(t_info *info, int i)
+void	fill_a(t_info *info, int i, int j, int first_top)
 {
-	int	j;
-	int	first_top;
-
 	while (i >= 0)
 	{
-		while (info->copy[i--] == info->stack_a[0])
+		while (i >= 0 && info->copy[i--] == info->stack_a[0]
+			&& info->size_copy > 5)
 			call_op("rra", rra, info);
 		i++;
 		first_top = 0;
@@ -86,6 +84,8 @@ void	fill_a(t_info *info, int i)
 		last_operations(info, first_top, j - 1);
 		i--;
 	}
+	while (info->stack_a[0] > -42)
+		call_op("rra", rra, info);
 }
 
 void	handle_three(t_info *info)
@@ -137,11 +137,11 @@ int	main(int argc, char **argv)
 	if (argc == 3)
 	{
 		call_op("sa", sa, &info);
-		return (0);
+		return (0 && ft_error("", info.stack_a, info.stack_b, info.copy));
 	}
 	fill_b(&info);
 	handle_three(&info);
 	info.stack_a[0] = -42;
-	fill_a(&info, info.size_copy - 4);
+	fill_a(&info, info.size_copy - 4, 0, 0);
 	ft_error("", info.stack_a, info.stack_b, info.copy);
 }

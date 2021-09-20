@@ -6,7 +6,7 @@
 /*   By: hmoumani <hmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:33:42 by hmoumani          #+#    #+#             */
-/*   Updated: 2021/08/04 16:33:43 by hmoumani         ###   ########.fr       */
+/*   Updated: 2021/08/31 19:37:02 by hmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	num_to_index(t_info *info)
 
 void	save_less(t_info *info, int *j, int i, int op)
 {
-	if (op)
+	if (op && info->size_copy > 5)
 	{
-		while (info->stack_b[*j] > info->stack_a[0]
+		while (*j >= 0 && info->stack_b[*j] > info->stack_a[0]
 			&& info->stack_b[*j] < info->copy[i])
 		{
 			call_op("pa", pa, info);
@@ -51,7 +51,7 @@ void	save_less(t_info *info, int *j, int i, int op)
 			*j = info->size_b - 1;
 		}
 	}
-	else
+	else if (info->size_copy > 5)
 	{
 		while (info->stack_b[0] > info->stack_a[0]
 			&& info->stack_b[0] < info->copy[i])
